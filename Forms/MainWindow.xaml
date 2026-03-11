@@ -1,0 +1,73 @@
+﻿<Window x:Class="Demo.Forms.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Demo.Forms"
+        mc:Ignorable="d"
+        Title="Главное меню" Height="450" Width="800" FontFamily="Times New Roman" WindowStyle="ThreeDBorderWindow" Icon="/Resuources/Icon.ico" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="105*" />
+            <RowDefinition Height="39*"/>
+            <RowDefinition Height="290*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="Chartreuse">
+            <Image HorizontalAlignment="Left" Height="auto" VerticalAlignment="Center" Width="auto" Source="/Resuources/Icon.JPG" Margin="10,0,0,0"/>
+            <Label x:Name="LabelUserName" Content="AAA" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" FontSize="16" Background="{x:Null}"/>
+            <Button x:Name="ButtonExit" Content="Выход" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Background="{x:Null}" FontSize="16" Click="ButtonExit_Click" ForceCursor="True"/>
+        </Grid>
+        <ScrollViewer Grid.Row="2" Margin="0,1,0,0">
+            <ItemsControl x:Name="ItemsControlProductsList">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                        <!-- Или StackPanel, если нужна вертикальная прокрутка -->
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <!-- Шаблон одной карточки -->
+                        <Border BorderBrush="Black" BorderThickness="2" Margin="5" Padding="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions >
+                                    <ColumnDefinition MaxWidth="300"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border BorderBrush="Black" BorderThickness="2"
+                                 Margin="1" Padding="1" Grid.Column="0">
+                                    <Image Grid.Column="0" Source="{Binding FotoPath}"/>
+                                </Border>
+                                <Border BorderBrush="Black" BorderThickness="2" Margin="1" Padding="1" Grid.Column="1">
+                                    <ListBox>
+                                        <TextBlock >
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} | {1}">
+                                                    <Binding Path="Category"/>
+                                                    <Binding Path="Name"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    <TextBlock Text="{Binding Description, StringFormat='Описание: {0}'}"/>
+                                    <TextBlock Text="{Binding Producer, StringFormat='Производитель: {0}'}"/>
+                                    <TextBlock Text="{Binding Provider, StringFormat='Поставщик: {0}'}"/>
+                                    <TextBlock Text="{Binding Price, StringFormat='Цена: {0:C}'}"/>
+                                    </ListBox>
+                                </Border>
+                                <Border BorderBrush="Black" BorderThickness="2" Margin="1" Padding="1" Grid.Column="2">
+                                   
+
+                                </Border>
+                                
+                                
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+    </Grid>
+</Window>
